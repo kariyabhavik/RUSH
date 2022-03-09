@@ -1,27 +1,24 @@
 package com.example.registration;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
+import android.text.Editable;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.registration.databinding.ActivitySigninBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
 
-public class SigninActivity<TextView> extends AppCompatActivity {
 
-   ActivitySigninBinding binding;
-   ProgressDialog progressDialog;
-   FirebaseAuth auth;
+public class SigninActivity extends AppCompatActivity {
+
+    ActivitySigninBinding binding;
+    ProgressDialog progressDialog;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,43 +27,50 @@ public class SigninActivity<TextView> extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         auth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(SigninActivity.this);
         progressDialog.setTitle("Login");
         progressDialog.setMessage("Login to your account");
 
-        binding.signUpIdBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.signUpIdBtn.setOnClickListener(view -> {
 
+            Editable email = binding.emailId.getText();
+            Editable password = binding.passwordId.getText();
+
+            boolean isEmail = email != null && !email.toString().isEmpty();
+            boolean isPassword = password != null && !password.toString().isEmpty();
+
+            if (isEmail && isPassword) {
                 progressDialog.show();
-                auth.signInWithEmailAndPassword(binding.emailId.getText().toString() , binding.passwordId.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
-                        if (task.isSuccessful()){
-                            Intent intent= new Intent(SigninActivity.this , MainActivity.class);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(SigninActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                auth.signInWithEmailAndPassword(email.toString(), password.toString()).
+                        addOnCompleteListener(task -> {
+                            progressDialog.dismiss();
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(SigninActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            } else {
+                if (!isEmail){
+                    binding.emailId.setError("Email is required");
+                }
+                if (!isPassword)
+                    binding.passwordId.setError("Password is required");
 
             }
+
         });
-        binding.signintextId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SigninActivity.this , SignUpActivity.class);
-                startActivity(intent);
-            }
+        binding.signintextId.setOnClickListener(view -> {
+            Intent intent = new Intent(SigninActivity.this, SignUpActivity.class);
+            startActivity(intent);
         });
 
-        if (auth.getCurrentUser()!= null){
-            Intent intent = new Intent(SigninActivity.this , MainActivity.class);
+        if (auth.getCurrentUser() != null) {
+            Intent intent = new Intent(SigninActivity.this, MainActivity.class);
             startActivity(intent);
         }
     }
