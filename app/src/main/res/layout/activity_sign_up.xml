@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <EditText
             android:id="@+id/username_id"
@@ -22,11 +23,12 @@
             android:layout_marginBottom="10dp"
             android:background="@color/white"
             android:ems="10"
-            android:hint="Username"
-            android:textColorHint="@color/grayBackground"
+            android:hint="@string/username"
             android:inputType="textPersonName"
             android:padding="9dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/grayBackground"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/email_id"
@@ -35,11 +37,12 @@
             android:layout_marginBottom="10dp"
             android:background="@color/white"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColorHint="@color/grayBackground"
             android:inputType="textEmailAddress"
             android:padding="9dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/password_id"
@@ -48,11 +51,12 @@
             android:layout_marginBottom="10dp"
             android:background="@color/white"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:textColorHint="@color/grayBackground"
             android:inputType="numberPassword"
             android:padding="9dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:autofillHints="" />
 
         <TextView
             android:id="@+id/alreadyhaveaccount_id"
@@ -61,8 +65,9 @@
             android:layout_gravity="right"
             android:gravity="right"
             android:padding="10dp"
-            android:text="Already have account"
-            android:textColor="@color/black" />
+            android:text="@string/already_have_account"
+            android:textColor="@color/black"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/sign_up_id_btn"
@@ -73,7 +78,7 @@
             android:backgroundTint="@color/colorPrimaryDark"
             android:hapticFeedbackEnabled="false"
             android:padding="15dp"
-            android:text="Sign Up"
+            android:text="@string/sign_up"
             app:cornerRadius="4dp"
             app:rippleColor="@color/colorPrimary" />
 
@@ -90,25 +95,27 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="Google"
-                app:cornerRadius="4dp" />
+                android:text="@string/google"
+                app:cornerRadius="4dp"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/facebook_btn_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="Facebook"
-                app:cornerRadius="4dp" />
+                android:text="@string/facebook"
+                app:cornerRadius="4dp"
+                style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/sign_up_phone_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign UP With Phone"
+            android:text="@string/sign_up_with_phone"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp" />
 

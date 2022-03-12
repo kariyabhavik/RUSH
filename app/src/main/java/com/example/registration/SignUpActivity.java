@@ -3,6 +3,7 @@ package com.example.registration;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,30 +29,50 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Objects.requireNonNull(getSupportActionBar()).hide();
+
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-
         progressDialog = new ProgressDialog(SignUpActivity.this);
         progressDialog.setTitle("creating Account");
         progressDialog.setMessage("we're creating your account");
 
         binding.signUpIdBtn.setOnClickListener(view -> {
-            progressDialog.show();
-            auth.createUserWithEmailAndPassword
-                    (binding.emailId.getText().toString() ,binding.passwordId.getText().toString()).addOnCompleteListener(task -> {
-                        progressDialog.dismiss();
-                        if (task.isSuccessful()){
-                            huser user = new huser(binding.usernameId.getText().toString(),binding.emailId.getText().toString(),binding.passwordId.getText().toString());
 
-                            String id = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
-                            database.getReference().child("users").child(id).setValue(user);
+            Editable username = binding.usernameId.getText();
+            Editable email = binding.emailId.getText();
+            Editable password = binding.passwordId.getText();
 
-                            Toast.makeText(SignUpActivity.this, "User Created successfully", Toast.LENGTH_SHORT).show();
+            boolean isUsername = username != null && !username.toString().isEmpty();
+            boolean isEmail = email != null && !email.toString().isEmpty();
+            boolean isPassword = password != null && !password.toString().isEmpty();
+
+            if (isUsername && isEmail && isPassword){
+                progressDialog.show();
+                auth.createUserWithEmailAndPassword( username.toString() , email.toString() ).addOnCompleteListener(task -> {
+                    progressDialog.dismiss();
+                    if (task.isSuccessful()) {
+                        huser user = new huser(binding.usernameId.toString(), binding.emailId.toString(), binding.passwordId.toString());
+
+                        String id = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
+                        database.getReference().child("users").child(id).setValue(user);
+
+                        Toast.makeText(SignUpActivity.this, "User Created successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(SignUpActivity.this, Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+                }else {
+                        if (!isUsername){
+                            binding.usernameId.setError("Username is required");
                         }
-                        else{
-                            Toast.makeText(SignUpActivity.this, Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        if (!isEmail)
+                            binding.emailId.setError("Email is require");
+
+                        if (!isPassword)
+                            binding.passwordId.setError("password is require");
+
+                    }
+
         });
 
         binding.alreadyhaveaccountId.setOnClickListener(view -> {

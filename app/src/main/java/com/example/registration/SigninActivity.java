@@ -44,8 +44,7 @@ public class SigninActivity extends AppCompatActivity {
 
             if (isEmail && isPassword) {
                 progressDialog.show();
-                auth.signInWithEmailAndPassword(email.toString(), password.toString()).
-                        addOnCompleteListener(task -> {
+                auth.signInWithEmailAndPassword(email.toString(), password.toString()).addOnCompleteListener(task -> {
                             progressDialog.dismiss();
                             if (task.isSuccessful()) {
                                 Intent intent = new Intent(SigninActivity.this, MainActivity.class);

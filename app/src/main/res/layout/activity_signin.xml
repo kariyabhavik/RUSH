@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <EditText
             android:id="@+id/email_id"
@@ -23,12 +24,13 @@
             android:layout_marginBottom="10dp"
             android:background="@color/white"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
             android:padding="9dp"
             android:textColor="@color/black"
-            android:textColorHint="#757575" />
+            android:textColorHint="#757575"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/password_id"
@@ -37,12 +39,13 @@
             android:layout_marginBottom="10dp"
             android:background="@color/white"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="numberPassword"
             android:minHeight="48dp"
             android:padding="9dp"
             android:textColor="@color/black"
-            android:textColorHint="#757575" />
+            android:textColorHint="#757575"
+            android:autofillHints="" />
 
         <TextView
             android:id="@+id/signintext_id"
@@ -51,8 +54,9 @@
             android:layout_gravity="right"
             android:gravity="right"
             android:padding="10dp"
-            android:text="Click for SignUp"
-            android:textColor="@color/black" />
+            android:text="@string/click_for_signup"
+            android:textColor="@color/black"
+            tools:ignore="RtlHardcoded" />
 
         <Button
             android:id="@+id/sign_up_id_btn"
@@ -63,7 +67,7 @@
             android:backgroundTint="@color/colorPrimaryDark"
             android:hapticFeedbackEnabled="false"
             android:padding="15dp"
-            android:text="Sign in"
+            android:text="@string/sign_in"
             app:cornerRadius="4dp"
             app:rippleColor="@color/colorPrimary" />
 
@@ -80,27 +84,29 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="Google"
+                android:text="@string/google"
                 android:textColor="#D7CCC8"
-                app:cornerRadius="4dp" />
+                app:cornerRadius="4dp"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/facebook_btn_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:text="Facebook"
+                android:text="@string/facebook"
                 android:textColor="#D7CCC8"
-                app:cornerRadius="4dp" />
+                app:cornerRadius="4dp"
+                style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/sign_up_phone_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign UP With Phone"
+            android:text="@string/sign_up_with_phone"
             android:textColor="#263238"
             android:textSize="18sp" />
 
