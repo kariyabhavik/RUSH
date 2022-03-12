@@ -70,7 +70,7 @@
             tools:ignore="RtlHardcoded" />
 
         <Button
-            android:id="@+id/sign_up_id_btn"
+            android:id="@+id/btn_sign_up"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -79,7 +79,7 @@
             android:hapticFeedbackEnabled="false"
             android:padding="15dp"
             android:text="@string/sign_up"
-            app:cornerRadius="4dp"
+            app:cornerRadius="10dp"
             app:rippleColor="@color/colorPrimary" />
 
         <LinearLayout
@@ -91,24 +91,26 @@
 
             <Button
                 android:id="@+id/google_btn_id"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/white"
+                android:drawableLeft="@drawable/common_google_signin_btn_icon_light"
                 android:padding="15dp"
                 android:text="@string/google"
-                app:cornerRadius="4dp"
-                style="?android:attr/buttonBarButtonStyle" />
+                app:cornerRadius="10dp" />
 
             <Button
                 android:id="@+id/facebook_btn_id"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:padding="15dp"
                 android:text="@string/facebook"
-                app:cornerRadius="4dp"
-                style="?android:attr/buttonBarButtonStyle" />
+                app:cornerRadius="10dp" />
         </LinearLayout>
 
         <TextView

@@ -8,24 +8,24 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.registration.databinding.ActivitySigninBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.example.registration.databinding.ActivitySigninBinding;
 
 import java.util.Objects;
 
 
 public class SigninActivity extends AppCompatActivity {
 
-    ActivitySigninBinding binding;
+  ActivitySigninBinding binding;
     ProgressDialog progressDialog;
     FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySigninBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
@@ -34,7 +34,7 @@ public class SigninActivity extends AppCompatActivity {
         progressDialog.setTitle("Login");
         progressDialog.setMessage("Login to your account");
 
-        binding.signUpIdBtn.setOnClickListener(view -> {
+        binding.btnSignIn.setOnClickListener(view -> {
 
             Editable email = binding.emailId.getText();
             Editable password = binding.passwordId.getText();
@@ -68,9 +68,17 @@ public class SigninActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+
+
         if (auth.getCurrentUser() != null) {
             Intent intent = new Intent(SigninActivity.this, MainActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }
