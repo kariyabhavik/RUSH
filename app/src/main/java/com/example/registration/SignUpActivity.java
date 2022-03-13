@@ -72,15 +72,15 @@ public class SignUpActivity extends AppCompatActivity {
 
             if (isUsername && isEmail && isPassword){
                 progressDialog.show();
-                auth.createUserWithEmailAndPassword( username.toString() , email.toString() ).addOnCompleteListener(task -> {
+                auth.createUserWithEmailAndPassword(email.toString(), password.toString()).addOnCompleteListener(task -> {
                     progressDialog.dismiss();
                     if (task.isSuccessful()) {
                         huser user = new huser(binding.etUserName.toString(), binding.etEmail.toString(), binding.etPassword.toString());
 
                         String id = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
                         database.getReference().child("users").child(id).setValue(user);
-
                         Toast.makeText(SignUpActivity.this, "User Created successfully", Toast.LENGTH_SHORT).show();
+
                     } else {
                         Toast.makeText(SignUpActivity.this, Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();
                     }
