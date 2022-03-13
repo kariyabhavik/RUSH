@@ -76,7 +76,6 @@ public class SignUpActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     if (task.isSuccessful()) {
                         huser user = new huser(binding.etUserName.toString(), binding.etEmail.toString(), binding.etPassword.toString());
-
                         String id = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
                         database.getReference().child("users").child(id).setValue(user);
                         Toast.makeText(SignUpActivity.this, "User Created successfully", Toast.LENGTH_SHORT).show();
