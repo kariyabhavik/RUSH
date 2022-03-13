@@ -34,10 +34,10 @@ public class SigninActivity extends AppCompatActivity {
         progressDialog.setTitle("Login");
         progressDialog.setMessage("Login to your account");
 
-        binding.btnSignIn.setOnClickListener(view -> {
+        binding.btnSignUp.setOnClickListener(view -> {
 
-            Editable email = binding.emailId.getText();
-            Editable password = binding.passwordId.getText();
+            Editable email = binding.etEmail.getText();
+            Editable password = binding.etPassword.getText();
 
             boolean isEmail = email != null && !email.toString().isEmpty();
             boolean isPassword = password != null && !password.toString().isEmpty();
@@ -55,15 +55,15 @@ public class SigninActivity extends AppCompatActivity {
                         });
             } else {
                 if (!isEmail){
-                    binding.emailId.setError("Email is required");
+                    binding.etEmail.setError("Email is required");
                 }
                 if (!isPassword)
-                    binding.passwordId.setError("Password is required");
+                    binding.etPassword.setError("Password is required");
 
             }
 
         });
-        binding.signintextId.setOnClickListener(view -> {
+        binding.tvClickForSignup.setOnClickListener(view -> {
             Intent intent = new Intent(SigninActivity.this, SignUpActivity.class);
             startActivity(intent);
         });

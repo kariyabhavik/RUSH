@@ -62,9 +62,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         binding.btnSignUp.setOnClickListener(view -> {
 
-            Editable username = binding.usernameId.getText();
-            Editable email = binding.emailId.getText();
-            Editable password = binding.passwordId.getText();
+            Editable username = binding.etUserName.getText();
+            Editable email = binding.etEmail.getText();
+            Editable password = binding.etPassword.getText();
 
             boolean isUsername = username != null && !username.toString().isEmpty();
             boolean isEmail = email != null && !email.toString().isEmpty();
@@ -75,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword( username.toString() , email.toString() ).addOnCompleteListener(task -> {
                     progressDialog.dismiss();
                     if (task.isSuccessful()) {
-                        huser user = new huser(binding.usernameId.toString(), binding.emailId.toString(), binding.passwordId.toString());
+                        huser user = new huser(binding.etUserName.toString(), binding.etEmail.toString(), binding.etPassword.toString());
 
                         String id = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
                         database.getReference().child("users").child(id).setValue(user);
@@ -87,23 +87,23 @@ public class SignUpActivity extends AppCompatActivity {
                 });
                 }else {
                         if (!isUsername){
-                            binding.usernameId.setError("Username is required");
+                            binding.etUserName.setError("Username is required");
                         }
                         if (!isEmail)
-                            binding.emailId.setError("Email is require");
+                            binding.etEmail.setError("Email is require");
 
                         if (!isPassword)
-                            binding.passwordId.setError("password is require");
+                            binding.etPassword.setError("password is require");
 
                     }
 
         });
 
-        binding.alreadyhaveaccountId.setOnClickListener(view -> {
+        binding.tvAlreadyHaveAccount.setOnClickListener(view -> {
             Intent intent = new Intent(SignUpActivity.this , SigninActivity.class);
             startActivity(intent);
         });
-        binding.googleBtnId.setOnClickListener(view -> signIn());
+        binding.btnGoogle.setOnClickListener(view -> signIn());
     }
     int RC_SIGN_IN = 65;
     private void signIn() {
@@ -139,6 +139,7 @@ public class SignUpActivity extends AppCompatActivity {
                         Log.d("TAG", "signInWithCredential:success");
                         FirebaseUser user = auth.getCurrentUser();
                         huser huser = new huser();
+                        assert user != null;
                         huser.setUserid(user.getUid());
                         huser.setUsername(user.getDisplayName());
                         database.getReference().child("huser").child(user.getUid()).setValue(huser);

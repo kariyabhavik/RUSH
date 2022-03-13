@@ -10,6 +10,7 @@
     <string name="sign_up_with_phone">Sign UP With Phone</string>
     <string name="click_for_signup">Click for SignUp</string>
     <string name="sign_in">Sign in</string>
+    <string name="mobile">Mobile</string>
 
 
 </resources>
