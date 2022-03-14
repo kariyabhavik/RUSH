@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseDatabase database;
     ProgressDialog progressDialog;
     GoogleSignInClient mGoogleSignInClient;
-
+    Button btn_login_mobile;
 
 
     @Override
@@ -102,6 +103,13 @@ public class SignUpActivity extends AppCompatActivity {
             Intent intent = new Intent(SignUpActivity.this , SigninActivity.class);
             startActivity(intent);
         });
+
+        btn_login_mobile = findViewById(R.id.btn_login_mobile);
+        btn_login_mobile.setOnClickListener(view -> {
+            Intent intent = new Intent(SignUpActivity.this , mobile_registration.class);
+            startActivity(intent);
+        });
+
         binding.btnGoogle.setOnClickListener(view -> signIn());
     }
     int RC_SIGN_IN = 65;

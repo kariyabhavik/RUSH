@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,9 +36,11 @@ public class SigninActivity extends AppCompatActivity {
     FirebaseAuth auth;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseDatabase database;
+    Button btn_login_mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = ActivitySigninBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -94,6 +98,15 @@ public class SigninActivity extends AppCompatActivity {
             Intent intent = new Intent(SigninActivity.this, MainActivity.class);
             startActivity(intent);
         }
+
+        btn_login_mobile = (Button)findViewById(R.id.btn_login_mobile);
+        btn_login_mobile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SigninActivity.this , mobile_registration.class);
+                startActivity(intent);
+            }
+        });
 
         binding.btnGoogle.setOnClickListener(view -> signIn());
     }

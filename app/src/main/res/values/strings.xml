@@ -11,6 +11,10 @@
     <string name="click_for_signup">Click for SignUp</string>
     <string name="sign_in">Sign in</string>
     <string name="mobile">Mobile</string>
+    <string name="enter_mobile">Enter Mobile</string>
+    <string name="get_otp">Get OTP</string>
+    <string name="enter_otp_here">Enter OTP here</string>
+    <string name="verify_and_signin">Verify and Signin</string>
 
 
 </resources>
