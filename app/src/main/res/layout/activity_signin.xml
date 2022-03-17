@@ -1,115 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SigninActivity"
-    android:background="@color/grayBackground"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_email"
+        style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:hint="@string/email"
+        android:textSize="15sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32" />
 
-        <EditText
-            android:id="@+id/email_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            android:padding="9dp"
-            android:textColor="@color/black"
-            android:textColorHint="#757575"
-            android:autofillHints="" />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_password"
+        style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="@string/password"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_email"
+        app:layout_constraintStart_toStartOf="@+id/et_email"
+        app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
-        <EditText
-            android:id="@+id/password_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:ems="10"
-            android:hint="@string/password"
-            android:inputType="numberPassword"
-            android:minHeight="48dp"
-            android:padding="9dp"
-            android:textColor="@color/black"
-            android:textColorHint="#757575"
-            android:autofillHints="" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_click_for_signup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="end"
+        android:text="@string/click_for_signup"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/et_password"
+        app:layout_constraintStart_toStartOf="@+id/et_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
-        <TextView
-            android:id="@+id/signintext_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:padding="10dp"
-            android:text="@string/click_for_signup"
-            android:textColor="@color/black"
-            tools:ignore="RtlHardcoded" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_sign_up"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorButton"
+        android:hapticFeedbackEnabled="false"
+        android:text="@string/sign_in"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/tv_click_for_signup"
+        app:layout_constraintStart_toStartOf="@+id/tv_click_for_signup"
+        app:layout_constraintTop_toBottomOf="@+id/tv_click_for_signup"
+        app:rippleColor="@color/colorPrimary" />
 
-        <Button
-            android:id="@+id/sign_up_id_btn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorPrimaryDark"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:hapticFeedbackEnabled="false"
-            android:padding="15dp"
-            android:text="@string/sign_in"
-            app:cornerRadius="4dp"
-            app:rippleColor="@color/colorPrimary" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="30dp"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal">
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_google"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/colorButton"
+        android:drawableStart="@drawable/common_google_signin_btn_icon_light"
+        android:text="@string/google"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/btn_login_mobile"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/btn_sign_up"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
 
-            <Button
-                android:id="@+id/google_btn_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="15dp"
-                android:text="@string/google"
-                android:textColor="#D7CCC8"
-                app:cornerRadius="4dp"
-                style="?android:attr/buttonBarButtonStyle" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login_mobile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButton"
+        android:drawableStart="@drawable/ic_mobile"
+        android:text="@string/mobile"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/btn_sign_up"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_google"
+        app:layout_constraintTop_toTopOf="@+id/btn_google" />
 
-            <Button
-                android:id="@+id/facebook_btn_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:padding="15dp"
-                android:text="@string/facebook"
-                android:textColor="#D7CCC8"
-                app:cornerRadius="4dp"
-                style="?android:attr/buttonBarButtonStyle" />
-        </LinearLayout>
 
-        <TextView
-            android:id="@+id/sign_up_phone_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_up_with_phone"
-            android:textColor="#263238"
-            android:textSize="18sp" />
 
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
