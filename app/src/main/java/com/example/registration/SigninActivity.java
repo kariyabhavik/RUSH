@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -27,7 +26,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
-
 
 public class SigninActivity extends AppCompatActivity {
 
@@ -99,13 +97,10 @@ public class SigninActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        btn_login_mobile = (Button)findViewById(R.id.btn_login_mobile);
-        btn_login_mobile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SigninActivity.this , mobile_registration.class);
-                startActivity(intent);
-            }
+        btn_login_mobile = findViewById(R.id.btn_login_mobile);
+        btn_login_mobile.setOnClickListener(view -> {
+            Intent intent = new Intent(SigninActivity.this , mobile_registration.class);
+            startActivity(intent);
         });
 
         binding.btnGoogle.setOnClickListener(view -> signIn());

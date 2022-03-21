@@ -15,6 +15,9 @@
     <string name="get_otp">Get OTP</string>
     <string name="enter_otp_here">Enter OTP here</string>
     <string name="verify_and_signin">Verify and Signin</string>
+    <string name="ambulance">Ambulance</string>
+    <string name="police">Police</string>
+    <string name="fire_brigade">Fire Brigade</string>
 
 
 </resources>
