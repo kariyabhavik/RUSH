@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +24,7 @@ public class otpProcess extends AppCompatActivity {
     Button b2;
     String phonenumber;
     String otpid;
+    FirebaseDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,7 @@ public class otpProcess extends AppCompatActivity {
         t2 = findViewById(R.id.t2);
         b2 = findViewById(R.id.b2);
         auth = FirebaseAuth.getInstance();
-
+        database = FirebaseDatabase.getInstance();
         initiateotp();
 
         b2.setOnClickListener(view -> {

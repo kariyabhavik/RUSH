@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,10 +10,10 @@
         style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/email"
-        android:textSize="15sp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:hint="@string/email"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -29,6 +30,7 @@
         android:hint="@string/password"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/et_email"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/et_email"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
@@ -87,6 +89,49 @@
         app:layout_constraintStart_toEndOf="@+id/btn_google"
         app:layout_constraintTop_toTopOf="@+id/btn_google" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="Register as"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_google"
+        app:layout_constraintVertical_bias="0.227"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_ambulance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/colorButton"
+        android:text="AMBULANCE"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_login_mobile"
+        app:layout_constraintStart_toStartOf="@id/btn_google"
+        app:layout_constraintTop_toBottomOf="@+id/btn_google" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_hospital"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorButton"
+        android:text="hospital"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:textColor="@color/white"
+        android:layout_marginStart="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_sign_up"
+        app:layout_constraintStart_toEndOf="@+id/btn_ambulance"
+        app:layout_constraintTop_toTopOf="@+id/btn_ambulance" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
