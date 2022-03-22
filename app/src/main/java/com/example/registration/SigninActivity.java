@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.motion.widget.MotionScene;
 
 import com.example.registration.models.huser;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -103,6 +105,21 @@ public class SigninActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+
+        //start
+        //this is a intent for registration  of ambulance
+
+
+        View btn_ambulance = findViewById(R.id.btn_ambulance);
+        btn_ambulance.setOnClickListener(view -> {
+            Intent intent = new Intent(SigninActivity.this , amb_reg_first.class);
+            startActivity(intent);
+        });
+
+        // end
+        //..
+
+
         binding.btnGoogle.setOnClickListener(view -> signIn());
     }
     int RC_SIGN_IN = 65;
@@ -158,4 +175,6 @@ public class SigninActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 }

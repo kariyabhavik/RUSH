@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Registration">
         <activity
+            android:name=".amb_reg_second"
+            android:exported="false" />
+        <activity
+            android:name=".amb_reg_first"
+            android:exported="false" />
+        <activity
             android:name=".otpProcess"
             android:exported="false"
             android:theme="@style/AppTheme" />
