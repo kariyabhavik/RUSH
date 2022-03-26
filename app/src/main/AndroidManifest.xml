@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Registration">
         <activity
+            android:name=".hos_reg_one"
+            android:exported="false" />
+        <activity
             android:name=".amb_reg_second"
             android:exported="false" />
         <activity

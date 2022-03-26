@@ -119,6 +119,17 @@ public class SigninActivity extends AppCompatActivity {
         // end
         //..
 
+        //this is the intent of hospitaol button
+
+        View btn_hospital = findViewById(R.id.btn_hospital);
+        btn_hospital.setOnClickListener(view -> {
+            Intent intent = new Intent(SigninActivity.this , hos_reg_one.class);
+            startActivity(intent);
+        });
+        //end
+
+
+
 
         binding.btnGoogle.setOnClickListener(view -> signIn());
     }
