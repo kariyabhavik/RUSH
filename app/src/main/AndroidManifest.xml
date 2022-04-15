@@ -25,7 +25,12 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyCCgSbU4W1M3Rg3dl8y28A_Baprq140WbQ" />
+
+        <activity
+            android:name=".driver"
+            android:label="driver"
+            android:exported="false"/>
 
         <activity
             android:name=".MapsActivityone"
@@ -33,12 +38,6 @@
             android:label="@string/title_activity_maps_activityone" />
         <activity
             android:name=".hos_reg_one"
-            android:exported="false" />
-        <activity
-            android:name=".amb_reg_second"
-            android:exported="false" />
-        <activity
-            android:name=".amb_reg_first"
             android:exported="false" />
         <activity
             android:name=".otpProcess"

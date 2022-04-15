@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Registration</string>
-    <string name="email">Email</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="already_have_account">Already have account</string>
@@ -19,6 +18,22 @@
     <string name="police">Police</string>
     <string name="fire_brigade">Fire Brigade</string>
     <string name="title_activity_maps_activityone">MapsActivityone</string>
+    <string name="normal_map">normal_map</string>
+    <string name="hybrid_map">hybrid_map</string>
+    <string name="satellite_map">satellite_map</string>
+    <string name="terrain_map">terrain_map</string>
+    <string name="register_yourself_as_a_ambulance_driver">Register as a ambulance driver</string>
+    <string name="full_name">Full name</string>
+    <string name="email">Email</string>
+    <string name="enter_driving_licence_no">Enter Driving Licence No</string>
+    <string name="phone_number">phone number</string>
+    <string name="do_you_have_evoc">Do you have EVOC</string>
+    <string name="are_you_a_valid_ambulace_driver">Are you a valid ambulace driver</string>
+    <string name="have_you_been_trained_as_emt">Have you been trained as EMT</string>
+    <string name="enter_pan_number">Enter Pan Number</string>
+    <string name="submit">submit</string>
+    <string name="enter_c1_licence_number">Enter c1 Licence number</string>
+    <string name="todo">TODO</string>
 
 
 </resources>
