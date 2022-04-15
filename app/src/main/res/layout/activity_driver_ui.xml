@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".driver_ui">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="75dp"
+        android:layout_height="107dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.863"
+        app:srcCompat="@drawable/googlemapsimage"
+        android:contentDescription="@string/todo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

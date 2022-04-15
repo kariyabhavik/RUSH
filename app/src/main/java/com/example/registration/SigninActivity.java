@@ -35,7 +35,7 @@ public class SigninActivity extends AppCompatActivity {
     FirebaseAuth auth;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseDatabase database;
-    Button btn_login_mobile;
+    Button btn_login_mobile, btn_ambulance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,18 +109,18 @@ public class SigninActivity extends AppCompatActivity {
         //this is a intent for registration  of ambulance
 
 
-        View btn_ambulance = findViewById(R.id.btn_ambulance);
+        btn_ambulance = findViewById(R.id.btn_ambulance);
         btn_ambulance.setOnClickListener(view -> {
-            Intent intent = new Intent(SigninActivity.this , amb_reg_first.class);
+            Intent intent = new Intent(SigninActivity.this, driver.class);
             startActivity(intent);
         });
 
-        // end
-        //..
 
-        //this is the intent of hospitaol button
+                //..
 
-        View btn_hospital = findViewById(R.id.btn_hospital);
+                //this is the intent of hospitaol button
+
+                View btn_hospital = findViewById(R.id.btn_hospital);
         btn_hospital.setOnClickListener(view -> {
             Intent intent = new Intent(SigninActivity.this , hos_reg_one.class);
             startActivity(intent);
