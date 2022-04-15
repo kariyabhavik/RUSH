@@ -9,10 +9,10 @@
         android:id="@+id/et_email"
         style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
         android:layout_width="0dp"
-        android:autofillHints="emailAddress"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:autofillHints="emailAddress"
         android:hint="@string/email"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,9 +26,9 @@
         android:id="@+id/et_password"
         style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
         android:layout_width="0dp"
-        android:autofillHints="password"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:autofillHints="password"
         android:hint="@string/password"
         android:password="true"
         android:textSize="15sp"
@@ -127,14 +127,25 @@
         android:id="@+id/btn_hospital"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:background="@color/colorButton"
         android:text="hospital"
-        app:layout_constraintHorizontal_bias="0.5"
         android:textColor="@color/white"
-        android:layout_marginStart="5dp"
         app:layout_constraintEnd_toEndOf="@+id/btn_sign_up"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_ambulance"
         app:layout_constraintTop_toTopOf="@+id/btn_ambulance" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="229dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.046"
+        app:srcCompat="@drawable/loginimage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
