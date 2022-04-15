@@ -3,6 +3,7 @@ package com.example.registration;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.concurrent.TimeUnit;
 
 public class otpProcess extends AppCompatActivity {
+    ProgressDialog progressDialog;
     FirebaseAuth auth;
     EditText t2;
     Button b2;
@@ -33,6 +35,9 @@ public class otpProcess extends AppCompatActivity {
         t2 = findViewById(R.id.t2);
         b2 = findViewById(R.id.b2);
         auth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(otpProcess.this);
+        progressDialog.setTitle("Login");
+        progressDialog.setMessage("Login to your account");
         database = FirebaseDatabase.getInstance();
         initiateotp();
 
@@ -51,8 +56,7 @@ public class otpProcess extends AppCompatActivity {
     }
 
     private void initiateotp(){
-        PhoneAuthOptions options =
-                PhoneAuthOptions.newBuilder(auth)
+        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(auth)
                         .setPhoneNumber(phonenumber)       // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                         .setActivity(this)                 // Activity (for callback binding)
@@ -81,8 +85,10 @@ public class otpProcess extends AppCompatActivity {
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        progressDialog.show();
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
+                    progressDialog.dismiss();
                     if (task.isSuccessful()) {
                         startActivity(new Intent(otpProcess.this , MainActivity.class));
                         finish();

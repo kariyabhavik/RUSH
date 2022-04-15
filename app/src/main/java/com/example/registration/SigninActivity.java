@@ -10,9 +10,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.motion.widget.MotionScene;
 
-import com.example.registration.models.huser;
+import com.example.registration.models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -135,8 +134,10 @@ public class SigninActivity extends AppCompatActivity {
     }
     int RC_SIGN_IN = 65;
     private void signIn() {
+
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+
     }
 
     @Override
@@ -148,9 +149,11 @@ public class SigninActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
+
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Log.d("TAG", "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w("TAG", "Google sign in failed", e);
@@ -160,18 +163,23 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
+        progressDialog.show();
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         auth.signInWithCredential(credential)
+
                 .addOnCompleteListener(this, task -> {
+                    progressDialog.dismiss();
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
+
                         Log.d("TAG", "signInWithCredential:success");
                         FirebaseUser user = auth.getCurrentUser();
-                        huser huser = new huser();
+                        User User = new User();
                         assert user != null;
-                        huser.setUserid(user.getUid());
-                        huser.setUsername(user.getDisplayName());
-                        database.getReference().child("huser").child(user.getUid()).setValue(huser);
+                        User.setUserid(user.getUid());
+                        User.setUsername(user.getDisplayName());
+                        database.getReference().child("User").child(user.getUid()).setValue(User);
+
 
                         Intent intent = new Intent(SigninActivity.this , MainActivity.class);
                         startActivity(intent);
@@ -186,6 +194,4 @@ public class SigninActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
 }

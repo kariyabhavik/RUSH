@@ -7,16 +7,19 @@ import android.text.Editable;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.registration.databinding.ActivitySignUpBinding;
-import com.example.registration.models.huser;
+import com.example.registration.models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
@@ -76,15 +79,26 @@ public class SignUpActivity extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword(email.toString(), password.toString()).addOnCompleteListener(task -> {
                     progressDialog.dismiss();
                     if (task.isSuccessful()) {
-                        huser user = new huser(binding.etUserName.toString(), binding.etEmail.toString(), binding.etPassword.toString());
+                        User user = new User(username.toString().trim() , email.toString().trim() , password.toString().trim());
                         String id = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
-                        database.getReference().child("users").child(id).setValue(user);
+                        database.getReference().child("user").child(id).setValue(user).addOnCompleteListener(new OnCompleteListener(){
+
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                Log.e("Tag TAg", "Result " + task.isSuccessful());
+                                //task.getException().printStackTrace();
+                            }
+                        });
                         Toast.makeText(SignUpActivity.this, "User Created successfully", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(SignUpActivity.this , MainActivity.class);
+                        startActivity(intent);
 
                     } else {
                         Toast.makeText(SignUpActivity.this, Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
+
                 }else {
                         if (!isUsername){
                             binding.etUserName.setError("Username is required");
@@ -139,22 +153,25 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        progressDialog.setTitle("Login");
+        progressDialog.setMessage("Login to your account");
+        progressDialog.show();
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
+                    progressDialog.dismiss();
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("TAG", "signInWithCredential:success");
                         FirebaseUser user = auth.getCurrentUser();
-                        huser huser = new huser();
+                        User User = new User();
                         assert user != null;
-                        huser.setUserid(user.getUid());
-                        huser.setUsername(user.getDisplayName());
-                        database.getReference().child("huser").child(user.getUid()).setValue(huser);
-
+                        User.setUserid(user.getUid());
+                        User.setUsername(user.getDisplayName());
+                        database.getReference().child("User").child(user.getUid()).setValue(User);
                         Intent intent = new Intent(SignUpActivity.this , MainActivity.class);
                         startActivity(intent);
                         Toast.makeText(this, "Sign in With google", Toast.LENGTH_SHORT).show();
-                        //updateUI(user);
+
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("TAG", "signInWithCredential:failure", task.getException());
