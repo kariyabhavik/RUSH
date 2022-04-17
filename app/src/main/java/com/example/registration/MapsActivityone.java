@@ -1,7 +1,12 @@
 package com.example.registration;
 
-import androidx.fragment.app.FragmentActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,21 +20,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.registration.databinding.ActivityMapsActivityoneBinding;
 
-public class MapsActivityone extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivityone extends AppCompatActivity implements OnMapReadyCallback {
+
 
     private GoogleMap mMap;
-    private ActivityMapsActivityoneBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMapsActivityoneBinding.inflate(getLayoutInflater());
+        com.example.registration.databinding.ActivityMapsActivityoneBinding binding = ActivityMapsActivityoneBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
     }
 
@@ -45,11 +51,20 @@ public class MapsActivityone extends FragmentActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        float zoom = 5;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng home = new LatLng(29.25584212437514, 77.31903827780567);
+        mMap.addMarker(new MarkerOptions().position(home).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(home));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoom));
+
+//        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-34, 151);
+//
+//
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//    }
     }
 
     @Override
@@ -79,4 +94,35 @@ public class MapsActivityone extends FragmentActivity implements OnMapReadyCallb
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
+
+
+//    private void enableMyLocation() {
+//        if (ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.ACCESS_FINE_LOCATION)
+//                == PackageManager.PERMISSION_GRANTED) {
+//            mMap.setMyLocationEnabled(true);
+//        } else {
+//            ActivityCompat.requestPermissions(this, new String[]
+//                            {Manifest.permission.ACCESS_FINE_LOCATION},
+//                    REQUEST_LOCATION_PERMISSION);
+//        }
+//    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode,
+//                                           @NonNull String[] permissions,
+//                                           @NonNull int[] grantResults) {
+//        // Check if location permissions are granted and if so enable the
+//        // location data layer.
+//        switch (requestCode) {
+//            case REQUEST_LOCATION_PERMISSION:
+//                if (grantResults.length > 0
+//                        && grantResults[0]
+//                        == PackageManager.PERMISSION_GRANTED) {
+//                    enableMyLocation();
+//                    break;
+//                }
+//        }
+//    }
 }
