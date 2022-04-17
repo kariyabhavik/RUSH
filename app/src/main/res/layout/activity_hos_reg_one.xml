@@ -56,7 +56,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName5"
+                android:id="@+id/et_hospital"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
@@ -68,12 +68,14 @@
 
 
             <RadioButton
+                android:id="@+id/rb_gov"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:text="goverment " />
 
             <RadioButton
+                android:id="@+id/rb_pri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="250dp"
@@ -89,7 +91,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName6"
+                android:id="@+id/ethos_reg_num"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
@@ -107,24 +109,28 @@
                 android:textColor="@color/black" />
 
             <CheckBox
+                android:id="@+id/cb_emergency_room"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:text="Emergency room" />
 
             <CheckBox
+                android:id="@+id/cb_icu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:text="ICU" />
 
             <CheckBox
+                android:id="@+id/cb_24hr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
                 android:text="24HRS Online" />
 
             <CheckBox
+                android:id="@+id/cb_clinic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
@@ -139,7 +145,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName7"
+                android:id="@+id/et_mailid"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
@@ -158,7 +164,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName8"
+                android:id="@+id/et_telephone_number"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
@@ -175,7 +181,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName9"
+                android:id="@+id/et_address"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
@@ -192,7 +198,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName10"
+                android:id="@+id/et_location_LAT"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
@@ -209,7 +215,7 @@
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName11"
+                android:id="@+id/et_address_LON"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
@@ -223,6 +229,7 @@
     </ScrollView>
 
     <ImageView
+        android:id="@+id/register"
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:background="@drawable/registerbutton"

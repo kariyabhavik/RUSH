@@ -81,13 +81,9 @@ public class SignUpActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         User user = new User(username.toString().trim() , email.toString().trim() , password.toString().trim());
                         String id = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
-                        database.getReference().child("user").child(id).setValue(user).addOnCompleteListener(new OnCompleteListener(){
-
-                            @Override
-                            public void onComplete(@NonNull Task task) {
-                                Log.e("Tag TAg", "Result " + task.isSuccessful());
-                                //task.getException().printStackTrace();
-                            }
+                        database.getReference().child("user").child(id).setValue(user).addOnCompleteListener((OnCompleteListener) task1 -> {
+                            Log.e("Tag TAg", "Result " + task1.isSuccessful());
+                            //task.getException().printStackTrace();
                         });
                         Toast.makeText(SignUpActivity.this, "User Created successfully", Toast.LENGTH_SHORT).show();
 
@@ -100,9 +96,9 @@ public class SignUpActivity extends AppCompatActivity {
                 });
 
                 }else {
-                        if (!isUsername){
+                        if (!isUsername)
                             binding.etUserName.setError("Username is required");
-                        }
+
                         if (!isEmail)
                             binding.etEmail.setError("Email is require");
 
@@ -181,5 +177,4 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }

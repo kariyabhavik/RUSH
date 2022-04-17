@@ -31,7 +31,7 @@
     <string name="are_you_a_valid_ambulace_driver">Are you a valid ambulace driver</string>
     <string name="have_you_been_trained_as_emt">Have you been trained as EMT</string>
     <string name="enter_pan_number">Enter Pan Number</string>
-    <string name="submit">submit</string>
+    <string name="driver_registration">Registration</string>
     <string name="enter_c1_licence_number">Enter c1 Licence number</string>
     <string name="todo">TODO</string>
 

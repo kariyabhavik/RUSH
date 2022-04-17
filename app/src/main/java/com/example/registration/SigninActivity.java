@@ -9,33 +9,38 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.registration.databinding.ActivitySigninBinding;
+import com.example.registration.models.DriverRegistration;
 import com.example.registration.models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
-import com.example.registration.databinding.ActivitySigninBinding;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
 public class SigninActivity extends AppCompatActivity {
 
-  ActivitySigninBinding binding;
+    ActivitySigninBinding binding;
     ProgressDialog progressDialog;
     FirebaseAuth auth;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseDatabase database;
     Button btn_login_mobile, btn_ambulance;
+    int RC_SIGN_IN = 65;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,16 +75,46 @@ public class SigninActivity extends AppCompatActivity {
             if (isEmail && isPassword) {
                 progressDialog.show();
                 auth.signInWithEmailAndPassword(email.toString(), password.toString()).addOnCompleteListener(task -> {
-                            progressDialog.dismiss();
-                            if (task.isSuccessful()) {
-                                Intent intent = new Intent(SigninActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(SigninActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                    if (task.isSuccessful()) {
+
+                        String uid = Objects.requireNonNull(task.getResult().getUser()).getUid();
+
+                        database.getReference().child("driver").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+                                try{
+                                    if (task.isSuccessful()) {
+                                        Object driverRegistration = task.getResult().getValue();
+                                        Intent intent;
+                                        if (driverRegistration == null) {
+                                            intent = new Intent(SigninActivity.this, MainActivity.class);
+                                        } else {
+                                            intent = new Intent(SigninActivity.this, driver_ui.class);
+                                        }
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(SigninActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                                        auth.signOut();
+                                    }
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                    Toast.makeText(SigninActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                                    auth.signOut();
+                                }
+
+
                             }
                         });
+
+
+                    } else {
+                        Toast.makeText(SigninActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             } else {
-                if (!isEmail){
+                if (!isEmail) {
                     binding.etEmail.setError("Email is required");
                 }
                 if (!isPassword)
@@ -93,14 +128,16 @@ public class SigninActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        if (auth.getCurrentUser() != null) {
-            Intent intent = new Intent(SigninActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
+
+
+//        if (auth.getCurrentUser() != null) {
+//            Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+//            startActivity(intent);
+//        }
 
         btn_login_mobile = findViewById(R.id.btn_login_mobile);
         btn_login_mobile.setOnClickListener(view -> {
-            Intent intent = new Intent(SigninActivity.this , mobile_registration.class);
+            Intent intent = new Intent(SigninActivity.this, mobile_registration.class);
             startActivity(intent);
         });
 
@@ -116,23 +153,21 @@ public class SigninActivity extends AppCompatActivity {
         });
 
 
-                //..
+        //..
 
-                //this is the intent of hospitaol button
+        //this is the intent of hospitaol button
 
-                View btn_hospital = findViewById(R.id.btn_hospital);
+        View btn_hospital = findViewById(R.id.btn_hospital);
         btn_hospital.setOnClickListener(view -> {
-            Intent intent = new Intent(SigninActivity.this , hos_reg_one.class);
+            Intent intent = new Intent(SigninActivity.this, hos_reg_one.class);
             startActivity(intent);
         });
         //end
 
 
-
-
         binding.btnGoogle.setOnClickListener(view -> signIn());
     }
-    int RC_SIGN_IN = 65;
+
     private void signIn() {
 
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -181,15 +216,15 @@ public class SigninActivity extends AppCompatActivity {
                         database.getReference().child("User").child(user.getUid()).setValue(User);
 
 
-                        Intent intent = new Intent(SigninActivity.this , MainActivity.class);
+                        Intent intent = new Intent(SigninActivity.this, MainActivity.class);
                         startActivity(intent);
                         Toast.makeText(this, "Sign in With google", Toast.LENGTH_SHORT).show();
                         //updateUI(user);
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("TAG", "signInWithCredential:failure", task.getException());
-                        Toast.makeText(SigninActivity.this , (CharSequence) task.getException(), Toast.LENGTH_SHORT).show();
-                        Snackbar.make(binding.getRoot(), "Authentication Faield." , Snackbar.LENGTH_SHORT).show();
+                        Toast.makeText(SigninActivity.this, (CharSequence) task.getException(), Toast.LENGTH_SHORT).show();
+                        Snackbar.make(binding.getRoot(), "Authentication Faield.", Snackbar.LENGTH_SHORT).show();
                         //updateUI(null);
                     }
                 });
